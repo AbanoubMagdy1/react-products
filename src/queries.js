@@ -8,8 +8,16 @@ const getProducts = gql`
         inStock
         category
         gallery
+        description
         attributes {
+          id
+          name
           type
+          items {
+            displayValue
+            value
+            id
+          }
         }
         prices {
           amount
@@ -20,4 +28,10 @@ const getProducts = gql`
   }
 `;
 
-export { getProducts };
+const getCurrencies = gql`
+  {
+    currencies
+  }
+`;
+
+export { getProducts, getCurrencies };

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  width: 100px;
-  height: 100px;
+  width: ${props => props.dim || '100px'};
+  height: ${props => props.dim || '100px'};
   margin: 100px auto;
   border-radius: 50%;
   background: conic-gradient(#333 300deg, #fff 60deg);

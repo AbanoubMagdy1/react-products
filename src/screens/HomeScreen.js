@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { graphql } from '@apollo/client/react/hoc';
 import { getProducts } from '../queries';
+import { capitalize } from '../utils';
 import Container from './HomeScreen.style';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Product from '../components/Product';
-
-function capitalize(str) {
-  return str[0].toUpperCase() + str.substring(1);
-}
 
 class HomeScreen extends Component {
   render() {

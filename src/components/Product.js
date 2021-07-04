@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import StyledProdcut from './Product.style';
-
-/*name
-      inStock
-      category
-      gallery
-      attributes {
-        type
-      }
-      prices{
-        amount
-        currency*/
+import { CurrenyContext } from '../contexts/CurrencyProvider';
+import { currencySymbols } from '../utils';
 
 class Product extends Component {
+  static contextType = CurrenyContext;
   render() {
     const { name, inStock, gallery, prices } = this.props.product;
+    const { chosenCurrency } = this.context;
+    const price = prices.find(price => price.currency === chosenCurrency);
+    const symbol = currencySymbols[chosenCurrency];
     return (
       <StyledProdcut stock={inStock}>
         <div className="img-container">
@@ -23,7 +18,9 @@ class Product extends Component {
           <p className="out-of-stock">Out of stock</p>
         </div>
         <p className="product-name">{name}</p>
-        <p className="product-price">{prices[0].amount}</p>
+        <p className="product-price">
+          {symbol} {price.amount}
+        </p>
       </StyledProdcut>
     );
   }

@@ -7,7 +7,8 @@ export default styled.div`
   opacity: ${props => (props.stock ? 1 : 0.3)};
 
   &:hover {
-    box-shadow: ${props => (props.stock ? '0 0 10px 1px #777' : 'none')};
+    box-shadow: ${props =>
+      props.stock ? '0px 4px 35px rgba(168, 172, 176, 0.19)' : 'none'};
 
     .img-container .fa-shopping-cart {
       opacity: ${props => (props.stock ? 1 : 0)};
@@ -15,7 +16,7 @@ export default styled.div`
   }
 
   .img-container {
-    height: 300px;
+    height: 260px;
     position: relative;
 
     img {
@@ -43,7 +44,8 @@ export default styled.div`
       left: 50%;
       transform: translate(-50%, -50%);
       text-transform: uppercase;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
+      white-space: nowrap;
     }
   }
 

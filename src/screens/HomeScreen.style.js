@@ -4,7 +4,7 @@ import Container from '../components/Container.style';
 export default styled(Container)`
   h2 {
     font-size: 2rem;
-    margin: 2rem 0;
+    margin: 2.5rem 0;
   }
 
   .products-container {
