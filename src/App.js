@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
 import Navbar from './components/NavBar';
 
 class App extends Component {
@@ -9,6 +10,7 @@ class App extends Component {
       <div>
         <Navbar />
         <Switch>
+          <Route path="/product/:id" component={ProductScreen} />
           <Route path="/:category?" component={HomeScreen} />
         </Switch>
       </div>

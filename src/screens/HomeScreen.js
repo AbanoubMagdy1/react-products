@@ -9,7 +9,6 @@ import Product from '../components/Product';
 
 class HomeScreen extends Component {
   render() {
-    console.log(this.props.data);
     const { category, loading, error } = this.props.data;
     const { category: categorySearch } = this.props.match.params;
     return (

@@ -4,6 +4,7 @@ const getProducts = gql`
   query GetCategory($type: CategoryInput) {
     category(input: $type) {
       products {
+        id
         name
         inStock
         category

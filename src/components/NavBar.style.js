@@ -3,6 +3,7 @@ import Container from './Container.style';
 
 export default styled(Container)`
   display: flex;
+  margin: 1rem auto;
   justify-content: space-between;
   align-items: center;
   position: relative;
