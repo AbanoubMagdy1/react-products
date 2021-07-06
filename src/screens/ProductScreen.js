@@ -5,8 +5,13 @@ import ImageDisplay from '../components/ImageDisplay';
 import Attribute from '../components/Attribute';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { withCart } from '../contexts/CartProvider';
 import { CurrenyContext } from '../contexts/CurrencyProvider';
-import { currencySymbols } from '../utils';
+import {
+  currencySymbols,
+  allAttributesChosen,
+  formatCartProduct,
+} from '../utils';
 import { getProducts } from '../queries';
 import { graphql } from '@apollo/client/react/hoc';
 
@@ -33,14 +38,17 @@ class ProductScreen extends Component {
     const { initiated } = this.state;
     if (data.category && !initiated) {
       let product = data.category.products.find(p => p.id === match.params.id);
-      console.log(product, data.category.products);
       const obj = {};
       if (product) {
         for (let a of product.attributes) {
           obj[a.id] = { type: a.type, choice: '' };
         }
       }
-      this.setState({ initiated: true, product, attributes: obj });
+      this.setState({
+        initiated: true,
+        product: product || {},
+        attributes: obj,
+      });
     }
   }
 
@@ -51,20 +59,27 @@ class ProductScreen extends Component {
   }
 
   setAttribute = (id, choice) => {
-    this.setState(
-      prevState => ({
-        attributes: {
-          ...prevState.attributes,
-          [id]: { ...prevState.attributes[id], choice },
-        },
-      }),
-      () => console.log(this.state)
-    );
+    this.setState(prevState => ({
+      attributes: {
+        ...prevState.attributes,
+        [id]: { ...prevState.attributes[id], choice },
+      },
+    }));
+  };
+
+  addToCart = () => {
+    const { attributes, product } = this.state;
+    if (!allAttributesChosen(attributes)) {
+      alert('Please choose all the product attributes');
+    } else {
+      const cartProduct = formatCartProduct(product, attributes);
+      this.props.handleAdd(cartProduct);
+    }
   };
 
   render() {
     const { product } = this.state;
-    const { name, gallery, description, attributes } = product;
+    const { name, gallery, description, attributes, inStock } = product;
     const { error, loading } = this.props.data;
     const [firstName, restName] = splitName(name);
 
@@ -73,6 +88,7 @@ class ProductScreen extends Component {
       price => price.currency === chosenCurrency
     );
     const symbol = currencySymbols[chosenCurrency];
+    console.log(this.props);
 
     return (
       <>
@@ -104,7 +120,13 @@ class ProductScreen extends Component {
                   {symbol} {price.amount}
                 </p>
               </div>
-              <button className="btn btn-green">Add to cart</button>
+              <button
+                className="btn btn-green"
+                disabled={!inStock}
+                onClick={this.addToCart}
+              >
+                Add to cart
+              </button>
               <div className="product-description">{parse(description)}</div>
             </div>
           </Container>
@@ -114,4 +136,4 @@ class ProductScreen extends Component {
   }
 }
 
-export default graphql(getProducts)(ProductScreen);
+export default withCart(graphql(getProducts)(ProductScreen));

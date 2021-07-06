@@ -25,6 +25,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button:disabled {
+  cursor: auto;
+  opacity: 0.4;
+}
+
 .btn {
   cursor: pointer;
   border: none;

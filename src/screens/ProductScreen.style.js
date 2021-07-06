@@ -37,6 +37,28 @@ export default styled(Container)`
       font-weight: 400;
       font-size: 1rem;
       font-family: Roboto, sans-serif;
+
+      h1,
+      h3 {
+        margin: 0.5rem 0;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      ul {
+        list-style: none;
+
+        li {
+          &::before {
+            content: '- ';
+          }
+        }
+      }
     }
   }
 `;
