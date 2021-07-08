@@ -42,9 +42,22 @@ button:disabled {
   font-size: 1rem;
 }
 
+.btn-sm {
+  width: auto;
+  padding: 0.3rem;
+  width: 2rem;
+  height: 2rem;
+}
+
 .btn-green {
   background: #5ece7b;
   color: white;
+}
+
+.btn-white {
+  border: 1px solid black;
+  background: #fff;
+  color: #000;
 }
 
 a {

@@ -38,11 +38,27 @@ export default styled.div`
         background-color: #1d1f22;
       }
       &.swatch {
+        border: none;
+        border-radius: 50%;
         transition: 0.3s transform;
         padding: 1.2rem;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          border-radius: 50%;
+          background-color: #111;
+          transition: 0.3s transform;
+          z-index: -1;
+        }
       }
-      &.swatch.chosen {
-        transform: scale(1.4);
+      &.swatch.chosen::before {
+        transform: scale(1.3);
       }
     }
   }

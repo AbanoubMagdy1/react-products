@@ -10,6 +10,15 @@ export const currencySymbols = {
   RUB: '₽',
 };
 
+export function splitName(name) {
+  if (typeof name != 'string') return [null, null];
+  let spaceIndex = name.indexOf(' ');
+  if (spaceIndex !== -1) {
+    return [name.slice(0, spaceIndex), name.slice(spaceIndex + 1)];
+  }
+  return [name, null];
+}
+
 export function allAttributesChosen(attrs) {
   for (let a in attrs) {
     if (!attrs[a].choice) return false;
@@ -25,9 +34,11 @@ export function sameAttributes(attrs1, attrs2) {
 }
 
 export function getPrice(chosenCurrency) {
-  return (
-    this.prices.find(price => price.currency === chosenCurrency)?.amount *
-    this.amount
+  return Number(
+    (
+      this.prices.find(price => price.currency === chosenCurrency)?.amount *
+      this.amount
+    ).toFixed(2)
   );
 }
 
@@ -53,10 +64,11 @@ export function addToCart(cartItems, product) {
       item.id === product.id &&
       sameAttributes(item.attributes, product.attributes)
     ) {
-      item.amount = item.amount + 1;
+      arr.push({ ...item, amount: item.amount + 1 });
       isFound = true;
+    } else {
+      arr.push(item);
     }
-    arr.push(item);
   }
   if (!isFound) {
     arr.push(product);
@@ -71,9 +83,10 @@ export function removeFromCart(cartItems, product) {
       item.id === product.id &&
       sameAttributes(item.attributes, product.attributes)
     ) {
-      item.amount = item.amount - 1;
-    }
-    if (item.amount !== 0) {
+      if (item.amount > 1) {
+        arr.push({ ...item, amount: item.amount - 1 });
+      }
+    } else {
       arr.push(item);
     }
   }

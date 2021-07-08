@@ -11,18 +11,10 @@ import {
   currencySymbols,
   allAttributesChosen,
   formatCartProduct,
+  splitName,
 } from '../utils';
 import { getProducts } from '../queries';
 import { graphql } from '@apollo/client/react/hoc';
-
-function splitName(name) {
-  if (typeof name != 'string') return [null, null];
-  let spaceIndex = name.indexOf(' ');
-  if (spaceIndex !== -1) {
-    return [name.slice(0, spaceIndex), name.slice(spaceIndex)];
-  }
-  return [name, null];
-}
 
 class ProductScreen extends Component {
   static contextType = CurrenyContext;
@@ -73,7 +65,7 @@ class ProductScreen extends Component {
       alert('Please choose all the product attributes');
     } else {
       const cartProduct = formatCartProduct(product, attributes);
-      this.props.handleAdd(cartProduct);
+      this.props.handleAdd(cartProduct, () => this.props.history.push('/cart'));
     }
   };
 
@@ -88,7 +80,6 @@ class ProductScreen extends Component {
       price => price.currency === chosenCurrency
     );
     const symbol = currencySymbols[chosenCurrency];
-    console.log(this.props);
 
     return (
       <>

@@ -1,23 +1,42 @@
 import React, { Component, createContext } from 'react';
 import { addToCart, removeFromCart } from '../utils';
+import { CurrenyContext } from './CurrencyProvider';
 
 export const CartContext = createContext();
 
 class CartProvider extends Component {
+  static contextType = CurrenyContext;
+
   state = {
     cartItems: [],
   };
 
-  handleAdd = product => {
-    this.setState(prevState => ({
-      cartItems: addToCart(prevState.cartItems, product),
-    }));
+  handleAdd = (product, cb) => {
+    this.setState(
+      prevState => ({
+        cartItems: addToCart(prevState.cartItems, product),
+      }),
+      () => {
+        if (cb) cb();
+      }
+    );
   };
 
   handleRemove = product => {
     this.setState(prevState => ({
       cartItems: removeFromCart(prevState.cartItems, product),
     }));
+  };
+
+  totalItems = () => {
+    return this.statecartItems.reduce((acc, cur) => acc + cur.amount, 0);
+  };
+
+  totalPrice = () => {
+    return this.statecartItems.reduce(
+      (acc, cur) => acc + cur.getPrice(this.context.chosenCurrency),
+      0
+    );
   };
 
   render() {
@@ -28,6 +47,8 @@ class CartProvider extends Component {
           cartItems,
           handleAdd: this.handleAdd,
           handleRemove: this.handleRemove,
+          totalItems: this.totalItems,
+          totalPrice: this.totalPrice,
         }}
       >
         {this.props.children}
