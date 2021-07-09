@@ -36,12 +36,12 @@ export class ImageSlider extends PureComponent {
   }
 
   render() {
-    console.log('rerendered');
-    const { images } = this.props;
+    const { images, mini } = this.props;
     return (
       <SliderStyled
         count={this.state.count}
         width={this.img.current?.clientWidth}
+        mini={mini}
       >
         {images.length === 1 ? (
           <img src={images[0]} alt="" />

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  width: 8rem;
+  width: ${props => (props.mini ? '4rem' : '8rem')};
+  height: 100%;
   overflow: hidden;
   margin-left: 0.5rem;
   position: relative;

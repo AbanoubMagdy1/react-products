@@ -1,81 +1,130 @@
 import styled from 'styled-components';
-import Container from './Container.style';
 
-export default styled(Container)`
-  display: flex;
-  margin: 1rem auto;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
+export default styled.nav`
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  transition: 0.3s background-color;
+  background-color: ${props => (props.navColored ? '#ced2d5' : '#fff')};
 
-  .nav-links {
-    a {
-      text-decoration: none;
-      color: #000;
-      font-weight: 400;
-      font-size: 1rem;
-      position: relative;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+    margin: 0 auto 2rem;
+    max-width: calc(100% - 80px);
+    padding: 1rem 0;
+    position: relative;
 
-      &:not(:last-child) {
-        margin-right: 1rem;
+    .overlay {
+      position: fixed;
+      top: 3.6rem;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 100;
+      background: rgba(57, 55, 72, 0.22);
+      display: none;
+
+      &.show {
+        display: block;
       }
+    }
 
-      &.active-link {
-        color: var(--c-primary);
-        font-weight: 600;
+    .nav-links {
+      a {
+        text-decoration: none;
+        color: #000;
+        font-weight: 400;
+        font-size: 1rem;
+        position: relative;
 
-        &::after {
-          content: '';
-          position: absolute;
-          bottom: -20px;
-          height: 1px;
-          left: -5px;
-          right: -5px;
-          background-color: var(--c-primary);
+        &:not(:last-child) {
+          margin-right: 1rem;
+        }
+
+        &.active-link {
+          color: var(--c-primary);
+          font-weight: 600;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            height: 2px;
+            left: -5px;
+            right: -5px;
+            background-color: var(--c-primary);
+          }
         }
       }
     }
-  }
 
-  .fa-undo-alt {
-    cursor: pointer;
-    background: linear-gradient(316.98deg, #52d67a 16.88%, #5aee87 84.04%);
-    color: white;
-    padding: 0.3rem;
-    box-shadow: 0 3px 0 0 var(--c-primary);
-    clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
-  }
-
-  .dropdown {
-    .currency-button {
+    .fa-undo-alt {
       cursor: pointer;
-
-      .fa-angle-down {
-        transition: 0.3s transform;
-        transform: ${props => (props.currencyShow ? 'rotate(180deg)' : '')};
-      }
+      background: linear-gradient(316.98deg, #52d67a 16.88%, #5aee87 84.04%);
+      color: white;
+      padding: 0.3rem;
+      box-shadow: 0 3px 0 0 var(--c-primary);
+      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
     }
 
-    .dropdown-menu {
-      position: absolute;
-      bottom: 0;
-      right: -1rem;
-      transform: translateY(105%);
-      z-index: 30;
-      &.dropdown-currency {
-        display: ${props => (props.currencyShow ? 'block' : 'none')};
+    .dropdown {
+      .icon {
+        cursor: pointer;
+        position: relative;
 
-        ul {
-          list-style: none;
-          box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+        &:not(:last-child) {
+          margin-right: 0.8rem;
+        }
+
+        .badge {
+          position: absolute;
+          top: -10px;
+          left: 10px;
+          text-align: center;
+          width: 20px;
+          height: 20px;
+          background-color: #333;
+          border-radius: 50%;
+          color: white;
+        }
+
+        .fa-angle-down {
+          transition: 0.3s transform;
+          transform: ${props => (props.currencyShow ? 'rotate(180deg)' : '')};
+        }
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        bottom: 0;
+        right: -1rem;
+        transform: translateY(100%);
+        z-index: 3000;
+
+        &.dropdown-cart {
+          display: ${props => (props.cartShow ? 'block' : 'none')};
           background-color: #fff;
+          padding: 1rem;
+        }
 
-          li {
-            cursor: pointer;
-            padding: 0.5rem 1rem;
+        &.dropdown-currency {
+          display: ${props => (props.currencyShow ? 'block' : 'none')};
 
-            &:hover {
-              background-color: #f7f7f7;
+          ul {
+            list-style: none;
+            box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+            background-color: #fff;
+
+            li {
+              cursor: pointer;
+              padding: 0.5rem 1rem;
+
+              &:hover {
+                background-color: #f7f7f7;
+              }
             }
           }
         }

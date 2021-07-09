@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StyledCart from './CartScreen.style';
+import { MainStyles } from '../components/CartItem.style';
 import CartItem from '../components/CartItem';
 import { withCart } from '../contexts/CartProvider';
 
@@ -15,12 +16,14 @@ export class CartScreen extends Component {
         ) : (
           <>
             {cartItems.map((product, i) => (
-              <CartItem
-                key={i}
-                product={product}
-                handleAdd={this.props.handleAdd}
-                handleRemove={this.props.handleRemove}
-              />
+              <MainStyles key={i}>
+                <CartItem
+                  product={product}
+                  handleAdd={this.props.handleAdd}
+                  handleRemove={this.props.handleRemove}
+                  mini={false}
+                />
+              </MainStyles>
             ))}
           </>
         )}

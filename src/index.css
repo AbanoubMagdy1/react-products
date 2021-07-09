@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
 :root {
@@ -44,9 +44,9 @@ button:disabled {
 
 .btn-sm {
   width: auto;
-  padding: 0.3rem;
-  width: 2rem;
-  height: 2rem;
+  padding: 0.1rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .btn-green {

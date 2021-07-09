@@ -1,5 +1,5 @@
 import React, { Component, createContext } from 'react';
-import { addToCart, removeFromCart } from '../utils';
+import { addToCart, removeFromCart, currencySymbols } from '../utils';
 import { CurrenyContext } from './CurrencyProvider';
 
 export const CartContext = createContext();
@@ -29,14 +29,15 @@ class CartProvider extends Component {
   };
 
   totalItems = () => {
-    return this.statecartItems.reduce((acc, cur) => acc + cur.amount, 0);
+    return this.state.cartItems.reduce((acc, cur) => acc + cur.amount, 0);
   };
 
   totalPrice = () => {
-    return this.statecartItems.reduce(
-      (acc, cur) => acc + cur.getPrice(this.context.chosenCurrency),
-      0
-    );
+    const { chosenCurrency } = this.context;
+    const price = this.state.cartItems
+      .reduce((acc, cur) => acc + cur.getPrice(chosenCurrency), 0)
+      .toFixed(2);
+    return `${currencySymbols[chosenCurrency]} ${price}`;
   };
 
   render() {

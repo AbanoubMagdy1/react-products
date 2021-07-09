@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import StyledItem from './CartItem.style';
 import ImageSlider from './ImageSlider';
 import Box from './Box';
 import { splitName, currencySymbols } from '../utils';
@@ -17,12 +16,12 @@ export class CartItem extends PureComponent {
 
   render() {
     const { chosenCurrency } = this.context;
-    const { product } = this.props;
+    const { product, mini } = this.props;
     const symbol = currencySymbols[chosenCurrency];
     const [firstName, restName] = splitName(product.name);
 
     return (
-      <StyledItem>
+      <>
         <div className="item-left">
           <div className="name">
             <p className="first-name">{firstName}</p>
@@ -33,7 +32,7 @@ export class CartItem extends PureComponent {
           </p>
           <div className="attributes">
             {Object.keys(product.attributes).map(key => (
-              <Box key={key} attr={product.attributes[key]} />
+              <Box key={key} attr={product.attributes[key]} mini={mini} />
             ))}
           </div>
         </div>
@@ -53,9 +52,12 @@ export class CartItem extends PureComponent {
               -
             </button>
           </div>
-          <ImageSlider images={product.gallery} />
+          <ImageSlider
+            images={mini ? [product.gallery[0]] : product.gallery}
+            mini={mini}
+          />
         </div>
-      </StyledItem>
+      </>
     );
   }
 }
