@@ -5,6 +5,11 @@ import CartItem from '../components/CartItem';
 import { withCart } from '../contexts/CartProvider';
 
 export class MiniCart extends Component {
+  goToCart = () => {
+    this.props.toggleCart();
+    this.props.history.push('/cart');
+  };
+
   render() {
     const { cartItems, totalItems, totalPrice } = this.props;
 
@@ -13,25 +18,24 @@ export class MiniCart extends Component {
         <p className="bag">
           <strong>My bag :</strong> {totalItems()} items
         </p>
-        {cartItems.map((product, i) => (
-          <MiniStyles key={i}>
-            <CartItem
-              product={product}
-              handleAdd={this.props.handleAdd}
-              handleRemove={this.props.handleRemove}
-              mini={true}
-            />
-          </MiniStyles>
-        ))}
+        <div className="products-container">
+          {cartItems.map((product, i) => (
+            <MiniStyles key={i}>
+              <CartItem
+                product={product}
+                handleAdd={this.props.handleAdd}
+                handleRemove={this.props.handleRemove}
+                mini={true}
+              />
+            </MiniStyles>
+          ))}
+        </div>
         <div className="price-container">
           <p className="price-total">Total price</p>
           <p className="actual-price">{totalPrice()}</p>
         </div>
         <div className="btns-container">
-          <button
-            className="btn btn-white"
-            onClick={() => this.props.history.push('/cart')}
-          >
+          <button className="btn btn-white" onClick={this.goToCart}>
             View bag
           </button>
           <button className="btn btn-green">Check out</button>

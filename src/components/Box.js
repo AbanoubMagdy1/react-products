@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const StyledText = styled.div`
-  width: ${props => (props.mini ? '1.6rem' : '3rem')};
-  height: ${props => (props.mini ? '1.6rem' : '3rem')};
+  width: ${props => (props.mini ? '2.2rem' : '3rem')};
+  height: ${props => (props.mini ? '2.2rem' : '3rem')};
   border: 1px solid black;
   display: flex;
   justify-content: center;
@@ -11,8 +11,8 @@ const StyledText = styled.div`
 `;
 
 const StyledSwatch = styled.div`
-  width: ${props => (props.mini ? '1.6rem' : '3rem')};
-  height: ${props => (props.mini ? '1.6rem' : '3rem')};
+  width: ${props => (props.mini ? '2.2rem' : '3rem')};
+  height: ${props => (props.mini ? '2.2rem' : '3rem')};
   border-radius: 50%;
   background-color: ${props => props.bg};
 `;

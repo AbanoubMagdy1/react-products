@@ -8,6 +8,11 @@ export default styled.div`
     margin: 0.6rem 0;
   }
 
+  .products-container {
+    max-height: 15rem;
+    overflow-y: scroll;
+  }
+
   .price-container {
     display: flex;
     justify-content: space-between;

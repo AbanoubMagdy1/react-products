@@ -112,7 +112,10 @@ class Navbar extends Component {
               {totalItems ? <span className="badge">{totalItems}</span> : ''}
             </span>
             <div className="dropdown-menu dropdown-cart">
-              <MiniCart history={this.props.history} />
+              <MiniCart
+                history={this.props.history}
+                toggleCart={this.toggleCart}
+              />
             </div>
           </div>
         </div>
