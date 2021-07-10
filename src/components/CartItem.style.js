@@ -52,6 +52,7 @@ export const MiniStyles = styled.div`
   margin-bottom: 2rem;
 
   .item-left {
+    margin-right : 2rem;
     .name {
       font-size: 1rem;
       font-weight: 300;

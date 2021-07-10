@@ -22,9 +22,9 @@ class Navbar extends Component {
 
   changeBackground = () => {
     const { navColored } = this.state;
-    if (window.scrollY > 80 && !navColored) {
+    if (window.pageYOffset > 0 && !navColored) {
       this.setState({ navColored: true });
-    } else if (window.screenY <= 80 && navColored) {
+    } else if (window.pageYOffset == 0 && navColored) {
       this.setState({ navColored: false });
     }
   };
