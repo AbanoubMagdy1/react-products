@@ -25,10 +25,10 @@ export default styled.nav`
       bottom: 0;
       z-index: 100;
       background: rgba(57, 55, 72, 0.22);
-      display: none;
+      visibility: hidden;
 
       &.show {
-        display: block;
+        animation: fade-in 0.2s ease-in-out forwards;
       }
     }
 
@@ -129,6 +129,21 @@ export default styled.nav`
           }
         }
       }
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      visibility: hidden;
+      opacity: 0;
+    }
+    1% {
+      visibility: visible;
+      opacity: 0;
+    }
+    to {
+      visibility: visible;
+      opacity: 1;
     }
   }
 `;

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 import ImageSlider from './ImageSlider';
 import Box from './Box';
 import { splitName, currencySymbols } from '../utils';
@@ -23,10 +24,13 @@ export class CartItem extends PureComponent {
     return (
       <>
         <div className="item-left">
-          <div className="name">
-            <p className="first-name">{firstName}</p>
-            <p className="rest-name">{restName}</p>
-          </div>
+          <Link to={`/product/${product.id}`}>
+            <div className="name">
+              <p className="first-name">{firstName}</p>
+              <p className="rest-name">{restName}</p>
+            </div>
+          </Link>
+
           <p className="price">
             {symbol} {product.getPrice(chosenCurrency)}
           </p>

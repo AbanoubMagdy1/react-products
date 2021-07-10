@@ -7,7 +7,7 @@ class SwatchAttribute extends Component {
       <div className="choices">
         {items.map(item => (
           <div
-            style={{ backgroundColor: item.displayValue }}
+            style={{ backgroundColor: item.value }}
             key={item.id}
             className={`box swatch ${choice === item.value && 'chosen'}`}
             onClick={() => setAttribute(id, item.value)}
