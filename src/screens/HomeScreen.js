@@ -16,8 +16,8 @@ class HomeScreen extends Component {
         {categorySearch && <h2>{capitalize(categorySearch)}</h2>}
         {loading ? (
           <Loader />
-        ) : error ? (
-          <Message>{error.message}</Message>
+        ) : error || !category ? (
+          <Message>{error?.message || 'No products found'}</Message>
         ) : (
           <div className="products-container">
             {category.products.map((product, i) => (

@@ -63,7 +63,7 @@ class Navbar extends Component {
   render() {
     const { currencies, chosenCurrency } = this.context;
     const symbol = currencySymbols[chosenCurrency];
-    const totalItems = this.props.totalItems();
+    const totalItems = this.props.cartItems.length;
     return (
       <Container
         currencyShow={this.state.currencyShow}
@@ -71,8 +71,14 @@ class Navbar extends Component {
         navColored={this.state.navColored}
       >
         <div className="container">
-          <div className={`overlay ${this.state.cartShow && 'show'}`}></div>
+          <div
+            className={`overlay ${this.state.cartShow && 'show'}`}
+            onClick={this.toggleCart}
+          ></div>
           <div className="nav-links">
+            <NavLink exact to={`/`} activeClassName="active-link">
+              All
+            </NavLink>
             {categories.map((category, i) => (
               <NavLink
                 key={i}
