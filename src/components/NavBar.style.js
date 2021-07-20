@@ -108,6 +108,7 @@ export default styled.nav`
           display: ${props => (props.cartShow ? 'block' : 'none')};
           background-color: #fff;
           padding: 1rem;
+          width: 20rem;
         }
 
         &.dropdown-currency {
