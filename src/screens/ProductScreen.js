@@ -61,12 +61,8 @@ class ProductScreen extends Component {
 
   addToCart = () => {
     const { attributes, product } = this.state;
-    if (!allAttributesChosen(attributes)) {
-      alert('Please choose all the product attributes');
-    } else {
-      const cartProduct = formatCartProduct(product, attributes);
-      this.props.handleAdd(cartProduct, () => this.props.history.push('/cart'));
-    }
+    const cartProduct = formatCartProduct(product, attributes);
+    this.props.handleAdd(cartProduct, () => this.props.history.push('/cart'));
   };
 
   render() {
@@ -113,7 +109,9 @@ class ProductScreen extends Component {
               </div>
               <button
                 className="btn btn-green"
-                disabled={!inStock}
+                disabled={
+                  !inStock || !allAttributesChosen(this.state.attributes)
+                }
                 onClick={this.addToCart}
               >
                 Add to cart
