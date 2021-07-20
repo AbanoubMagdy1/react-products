@@ -42,7 +42,7 @@ export function getPrice(chosenCurrency) {
   );
 }
 
-export function formatCartProduct(product, attributes) {
+export function formatCartProduct(product, attributes, amount = 1) {
   const { id, name, category, gallery, prices } = product;
   return {
     id,
@@ -51,7 +51,7 @@ export function formatCartProduct(product, attributes) {
     gallery,
     prices,
     attributes,
-    amount: 1,
+    amount,
     getPrice,
   };
 }
@@ -64,7 +64,7 @@ export function addToCart(cartItems, product) {
       item.id === product.id &&
       sameAttributes(item.attributes, product.attributes)
     ) {
-      arr.push({ ...item, amount: item.amount + 1 });
+      arr.push({ ...item, amount: product.amount });
       isFound = true;
     } else {
       arr.push(item);

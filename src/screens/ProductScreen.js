@@ -26,6 +26,7 @@ class ProductScreen extends Component {
     product: {},
     attributes: {},
     initiated: false,
+    amount: 1,
   };
 
   componentDidUpdate() {
@@ -64,13 +65,21 @@ class ProductScreen extends Component {
 
   addToCart = () => {
     const { openSnack } = this.props;
-    const { attributes, product } = this.state;
-    const cartProduct = formatCartProduct(product, attributes);
+    const { attributes, product, amount } = this.state;
+    const cartProduct = formatCartProduct(
+      product,
+      attributes,
+      Math.floor(amount)
+    );
     this.props.handleAdd(cartProduct, () => openSnack(product.name));
   };
 
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
-    const { product } = this.state;
+    const { product, amount } = this.state;
     const { name, gallery, description, attributes, inStock } = product;
     const { error, loading } = this.props.data;
     const [firstName, restName] = splitName(name);
@@ -111,6 +120,17 @@ class ProductScreen extends Component {
                   {symbol} {price.amount}
                 </p>
               </div>
+              {inStock && (
+                <div className="product-amount">
+                  <p>Quantity :</p>
+                  <input
+                    type="number"
+                    name="amount"
+                    value={amount}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              )}
               <button
                 className="btn btn-green"
                 disabled={

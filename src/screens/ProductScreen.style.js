@@ -32,6 +32,23 @@ export default styled(Container)`
       }
     }
 
+    .product-amount {
+      font-weight: 700;
+      margin: 2rem 0;
+      display: flex;
+      align-items: center;
+
+      p {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 1.125rem; /*18px*/
+      }
+      input {
+        margin-left: 2rem;
+        width: 3rem;
+        font-size: 1.5rem;
+      }
+    }
+
     .product-description {
       margin-top: 2rem;
       font-weight: 400;
