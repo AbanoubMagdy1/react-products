@@ -16,7 +16,7 @@ export default styled.div`
   }
 
   .img-container {
-    height: 260px;
+    aspect-ratio: 1/1;
     position: relative;
 
     img {
@@ -31,7 +31,7 @@ export default styled.div`
       border-radius: 50%;
       right: 10px;
       bottom: 0;
-      transform: translateY(50%);
+      transform: translateY(40%);
       padding: 0.6rem;
       opacity: 0;
       transition: 0.3s opacity;
