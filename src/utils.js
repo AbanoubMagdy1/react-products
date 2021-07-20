@@ -64,7 +64,7 @@ export function addToCart(cartItems, product) {
       item.id === product.id &&
       sameAttributes(item.attributes, product.attributes)
     ) {
-      arr.push({ ...item, amount: product.amount });
+      arr.push({ ...item, amount: item.amount + product.amount });
       isFound = true;
     } else {
       arr.push(item);

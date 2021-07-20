@@ -69,7 +69,7 @@ class ProductScreen extends Component {
     const cartProduct = formatCartProduct(
       product,
       attributes,
-      Math.floor(amount)
+      amount < 1 ? 1 : Math.floor(amount)
     );
     this.props.handleAdd(cartProduct, () => openSnack(product.name));
   };
@@ -126,6 +126,8 @@ class ProductScreen extends Component {
                   <input
                     type="number"
                     name="amount"
+                    min="1"
+                    step="1"
                     value={amount}
                     onChange={this.handleChange}
                   />
