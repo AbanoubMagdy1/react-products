@@ -5,7 +5,7 @@ export default styled.div`
   padding: 1rem;
   transition: box-shadow 0.3s;
   opacity: ${props => (props.stock ? 1 : 0.3)};
-  cursor: 'pointer';
+  cursor: pointer;
   &:hover {
     box-shadow: ${props =>
       props.stock ? '0px 4px 35px rgba(168, 172, 176, 0.19)' : 'none'};
@@ -34,7 +34,11 @@ export default styled.div`
       transform: translateY(40%);
       padding: 0.6rem;
       opacity: 0;
-      transition: 0.3s opacity;
+      transition: 0.3s all;
+
+      &:hover {
+        box-shadow: 0 0 10px #333;
+      }
     }
 
     .out-of-stock {

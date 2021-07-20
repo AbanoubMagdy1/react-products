@@ -8,6 +8,7 @@ import Attribute from '../components/Attribute';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { withCart } from '../contexts/CartProvider';
+import { withSnack } from '../contexts/SnackProvider';
 import { CurrenyContext } from '../contexts/CurrencyProvider';
 import {
   currencySymbols,
@@ -25,7 +26,6 @@ class ProductScreen extends Component {
     product: {},
     attributes: {},
     initiated: false,
-    open: false,
   };
 
   componentDidUpdate() {
@@ -62,18 +62,11 @@ class ProductScreen extends Component {
     }));
   };
 
-  openSnack = () => {
-    this.setState({ open: true }, () => setTimeout(this.closeSnack, 3000));
-  };
-
-  closeSnack = () => {
-    this.setState({ open: false });
-  };
-
   addToCart = () => {
+    const { openSnack } = this.props;
     const { attributes, product } = this.state;
     const cartProduct = formatCartProduct(product, attributes);
-    this.props.handleAdd(cartProduct, this.openSnack);
+    this.props.handleAdd(cartProduct, () => openSnack(product.name));
   };
 
   render() {
@@ -90,10 +83,6 @@ class ProductScreen extends Component {
 
     return (
       <>
-        <SnackBar open={this.state.open}>
-          {product.name} is added to the cart.{' '}
-          <Link to="/cart"> View cart</Link>
-        </SnackBar>
         {loading ? (
           <Loader />
         ) : error || !product.id ? (
@@ -140,4 +129,4 @@ class ProductScreen extends Component {
   }
 }
 
-export default withCart(graphql(getProducts)(ProductScreen));
+export default withSnack(withCart(graphql(getProducts)(ProductScreen)));

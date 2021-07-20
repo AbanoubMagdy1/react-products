@@ -21,7 +21,7 @@ class HomeScreen extends Component {
         ) : (
           <div className="products-container">
             {category.products.map((product, i) => (
-              <Product key={i} product={product} />
+              <Product key={i} product={product} history={this.props.history} />
             ))}
           </div>
         )}
