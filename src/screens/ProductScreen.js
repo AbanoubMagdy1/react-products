@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import Container from './ProductScreen.style';
 import ImageDisplay from '../components/ImageDisplay';
+import SnackBar from '../components/SnackBar';
 import Attribute from '../components/Attribute';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -23,6 +25,7 @@ class ProductScreen extends Component {
     product: {},
     attributes: {},
     initiated: false,
+    open: false,
   };
 
   componentDidUpdate() {
@@ -59,10 +62,18 @@ class ProductScreen extends Component {
     }));
   };
 
+  openSnack = () => {
+    this.setState({ open: true }, () => setTimeout(this.closeSnack, 3000));
+  };
+
+  closeSnack = () => {
+    this.setState({ open: false });
+  };
+
   addToCart = () => {
     const { attributes, product } = this.state;
     const cartProduct = formatCartProduct(product, attributes);
-    this.props.handleAdd(cartProduct, () => this.props.history.push('/cart'));
+    this.props.handleAdd(cartProduct, this.openSnack);
   };
 
   render() {
@@ -79,6 +90,10 @@ class ProductScreen extends Component {
 
     return (
       <>
+        <SnackBar open={this.state.open}>
+          {product.name} is added to the cart.{' '}
+          <Link to="/cart"> View cart</Link>
+        </SnackBar>
         {loading ? (
           <Loader />
         ) : error || !product.id ? (
