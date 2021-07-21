@@ -12,7 +12,7 @@ export const currencySymbols = {
 
 export function splitName(name) {
   if (typeof name != 'string') return [null, null];
-  let spaceIndex = name.indexOf(' ');
+  const spaceIndex = name.indexOf(' ');
   if (spaceIndex !== -1) {
     return [name.slice(0, spaceIndex), name.slice(spaceIndex + 1)];
   }
@@ -20,14 +20,14 @@ export function splitName(name) {
 }
 
 export function allAttributesChosen(attrs) {
-  for (let a in attrs) {
+  for (const a in attrs) {
     if (!attrs[a].choice) return false;
   }
   return true;
 }
 
 export function sameAttributes(attrs1, attrs2) {
-  for (let key in attrs1) {
+  for (const key in attrs1) {
     if (attrs1[key].choice !== attrs2[key]?.choice) return false;
   }
   return true;
@@ -56,15 +56,15 @@ export function formatCartProduct(product, attributes, amount = 1) {
   };
 }
 
-export function addToCart(cartItems, product) {
-  let arr = [];
+export function addToCart(cartItems, product, amount = 1) {
+  const arr = [];
   let isFound = false;
-  for (let item of cartItems) {
+  for (const item of cartItems) {
     if (
       item.id === product.id &&
       sameAttributes(item.attributes, product.attributes)
     ) {
-      arr.push({ ...item, amount: item.amount + product.amount });
+      arr.push({ ...item, amount: item.amount + Number(amount) });
       isFound = true;
     } else {
       arr.push(item);
@@ -77,8 +77,8 @@ export function addToCart(cartItems, product) {
 }
 
 export function removeFromCart(cartItems, product) {
-  let arr = [];
-  for (let item of cartItems) {
+  const arr = [];
+  for (const item of cartItems) {
     if (
       item.id === product.id &&
       sameAttributes(item.attributes, product.attributes)

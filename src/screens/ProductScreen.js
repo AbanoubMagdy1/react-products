@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import Container from './ProductScreen.style';
 import ImageDisplay from '../components/ImageDisplay';
-import SnackBar from '../components/SnackBar';
 import Attribute from '../components/Attribute';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -71,7 +69,7 @@ class ProductScreen extends Component {
       attributes,
       amount < 1 ? 1 : Math.floor(amount)
     );
-    this.props.handleAdd(cartProduct, () => openSnack(product.name));
+    this.props.handleAdd(cartProduct, amount, () => openSnack(product.name));
   };
 
   handleChange = e => {

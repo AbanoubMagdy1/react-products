@@ -17,7 +17,7 @@ class Product extends Component {
     e.stopPropagation();
     const { product, openSnack } = this.props;
     const cartProduct = formatCartProduct(product, {});
-    this.props.handleAdd(cartProduct, () => openSnack(product.name));
+    this.props.handleAdd(cartProduct, 1, () => openSnack(product.name));
   };
 
   render() {

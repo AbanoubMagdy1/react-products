@@ -11,10 +11,10 @@ class CartProvider extends Component {
     cartItems: [],
   };
 
-  handleAdd = (product, cb) => {
+  handleAdd = (product, amount = 1, cb) => {
     this.setState(
       prevState => ({
-        cartItems: addToCart(prevState.cartItems, product),
+        cartItems: addToCart(prevState.cartItems, product, amount),
       }),
       () => {
         if (cb) cb();
