@@ -22,7 +22,10 @@ const getProducts = gql`
         }
         prices {
           amount
-          currency
+          currency{
+            label
+            symbol
+          }
         }
       }
     }
@@ -31,7 +34,10 @@ const getProducts = gql`
 
 const getCurrencies = gql`
   {
-    currencies
+    currencies{
+      label
+      symbol
+    }
   }
 `;
 

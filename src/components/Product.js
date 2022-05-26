@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import StyledProdcut from './Product.style';
 import { CurrenyContext } from '../contexts/CurrencyProvider';
-import { currencySymbols, formatCartProduct } from '../utils';
+import { formatCartProduct } from '../utils';
 import { withCart } from '../contexts/CartProvider';
 import { withSnack } from '../contexts/SnackProvider';
 
@@ -23,8 +23,7 @@ class Product extends Component {
   render() {
     const { name, inStock, gallery, prices, attributes } = this.props.product;
     const { chosenCurrency } = this.context;
-    const price = prices.find(price => price.currency === chosenCurrency);
-    const symbol = currencySymbols[chosenCurrency];
+    const price = prices.find(price => price.currency.label === chosenCurrency);
     return (
       <StyledProdcut stock={inStock} onClick={this.goToProductPage}>
         <div className="img-container">
@@ -36,7 +35,7 @@ class Product extends Component {
         </div>
         <p className="product-name">{name}</p>
         <p className="product-price">
-          {symbol} {price.amount}
+          {price.currency.symbol} {price.amount}
         </p>
       </StyledProdcut>
     );

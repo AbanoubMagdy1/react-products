@@ -25,7 +25,7 @@ class CurrencyProvider extends Component {
   componentDidUpdate() {
     const { currencies } = this.props.data;
     if (currencies && this.state.currencies.length === 0) {
-      this.setState({ currencies });
+      this.setState({ currencies: currencies.map(c => c.label) });
     }
   }
   render() {

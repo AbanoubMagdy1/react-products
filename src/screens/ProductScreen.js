@@ -9,7 +9,6 @@ import { withCart } from '../contexts/CartProvider';
 import { withSnack } from '../contexts/SnackProvider';
 import { CurrenyContext } from '../contexts/CurrencyProvider';
 import {
-  currencySymbols,
   allAttributesChosen,
   formatCartProduct,
   splitName,
@@ -84,9 +83,8 @@ class ProductScreen extends Component {
 
     const { chosenCurrency } = this.context;
     const price = product.prices?.find(
-      price => price.currency === chosenCurrency
+      price => price.currency.label === chosenCurrency
     );
-    const symbol = currencySymbols[chosenCurrency];
 
     return (
       <>
@@ -115,7 +113,7 @@ class ProductScreen extends Component {
               <div className="product-price">
                 <p className="price-text">Price:</p>
                 <p className="price">
-                  {symbol} {price.amount}
+                  {price.currency.label} {price.amount}
                 </p>
               </div>
               {inStock && (

@@ -20,7 +20,7 @@ export class CartItem extends PureComponent {
     const { product, mini } = this.props;
     const symbol = currencySymbols[chosenCurrency];
     const [firstName, restName] = splitName(product.name);
-
+    console.log(product)
     return (
       <>
         <div className="item-left">

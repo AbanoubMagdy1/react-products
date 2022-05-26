@@ -24,7 +24,7 @@ class Navbar extends Component {
     const { navColored } = this.state;
     if (window.pageYOffset > 0 && !navColored) {
       this.setState({ navColored: true });
-    } else if (window.pageYOffset == 0 && navColored) {
+    } else if (window.pageYOffset === 0 && navColored) {
       this.setState({ navColored: false });
     }
   };

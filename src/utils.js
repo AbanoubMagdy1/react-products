@@ -36,7 +36,7 @@ export function sameAttributes(attrs1, attrs2) {
 export function getPrice(chosenCurrency) {
   return Number(
     (
-      this.prices.find(price => price.currency === chosenCurrency)?.amount *
+      this.prices.find(price => price.currency.label === chosenCurrency)?.amount *
       this.amount
     ).toFixed(2)
   );
